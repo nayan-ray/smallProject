@@ -1,0 +1,44 @@
+body{
+    padding: 0 7%;
+}
+
+.heading{
+    font-size: 80px;
+    text-align: center;
+}
+.para{
+    font-size: 30px;
+}
+
+progress{
+    width: 80%;
+    position: fixed;
+    top: 0;
+    left: 7%;
+    height: 20px;
+}
+
+#proBar{
+    position: fixed;
+    bottom: 0;
+    right: 2%;
+    display: inline-block;
+}
+#proWrapper{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: yellow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#proInner{
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    border-radius: 50%;
+    background: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
