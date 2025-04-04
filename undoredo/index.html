@@ -1,49 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>This is undo redo functionality</h1>
-    <input type="text" name="" id="input" value="" placeholder="enter something" onchange="mySet()">
+    <input
+      type="text"
+      name=""
+      id="input"
+      value=""
+      placeholder="enter something"
+      onchange="mySet()"
+    />
     <button id="undo" onclick="unDo()">
-        undo
+      undo
     </button>
 
     <button id="redo" onclick="reDo()">
-        redo
+      redo
     </button>
 
     <script>
-        let input = document.getElementById('input');
-        let undo = document.getElementById('undo');
-        let redo = document.getElementById('redo');
-        let history = [];
-        let current = 0;
-        //set function
-        function mySet (){       
-            //if need condition
-            history.push(input.value);
-            if(history.length > 3){
-              history =  history.slice(3)
-            }
-            current = history.length - 1;
-          
+      let input = document.getElementById("input");
+      let undo = document.getElementById("undo");
+      let redo = document.getElementById("redo");
+      let history = [];
+      let current = 0;
+      //set function
+      function mySet() {
+        //if need condition
+        history.push(input.value);
+        if (history.length > 3) {
+          history = history.slice(3);
         }
-    //unDo function
-    function unDo(){
-        current = Math.max((current - 1), 0);
-        input.value = history[current];      
-    }
-      
-    //redo function
-    function reDo(){
-        current = Math.min((current + 1), (history.length - 1));
+        current = history.length - 1;
+      }
+      //unDo function
+      function unDo() {
+        current = Math.max(current - 1, 0);
+        if (history.length === 0) {
+          input.value = "";
+          return;
+        }
         input.value = history[current];
-    }
+      }
 
-    </script>   
-</body>
+      //redo function
+      function reDo() {
+        current = Math.min(current + 1, history.length - 1);
+        if (history.length === 0) {
+          input.value = "";
+          return;
+        }
+        input.value = history[current];
+      }
+
+      //sort cart
+
+      window.addEventListener("keydown", function (e) {
+       
+        if (e.key === "ArrowUp") {
+            e.preventDefault()
+            unDo();
+        }
+        if (e.key === "ArrowDown") {
+            e.preventDefault()
+            reDo();
+        }
+
+        if (e.ctrlKey && e.key === "z") {
+          e.preventDefault();
+          unDo();
+        }
+        if (e.ctrlKey && e.key === "y") {
+          e.preventDefault();
+          reDo();
+        }
+      });
+
+     
+    </script>
+  </body>
 </html>
