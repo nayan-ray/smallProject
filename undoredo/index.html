@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>This is undo redo functionality</h1>
+    <input type="text" name="" id="input" value="" placeholder="enter something" onchange="mySet()">
+    <button id="undo" onclick="unDo()">
+        undo
+    </button>
+
+    <button id="redo" onclick="reDo()">
+        redo
+    </button>
+
+    <script>
+        let input = document.getElementById('input');
+        let undo = document.getElementById('undo');
+        let redo = document.getElementById('redo');
+        let history = [];
+        let current = 0;
+        //set function
+        function mySet (){       
+            //if need condition
+            history.push(input.value);
+            if(history.length > 3){
+              history =  history.slice(3)
+            }
+            current = history.length - 1;
+          
+        }
+    //unDo function
+    function unDo(){
+        current = Math.max((current - 1), 0);
+        input.value = history[current];      
+    }
+      
+    //redo function
+    function reDo(){
+        current = Math.min((current + 1), (history.length - 1));
+        input.value = history[current];
+    }
+
+    </script>   
+</body>
+</html>
